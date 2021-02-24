@@ -1,0 +1,68 @@
+.container {
+  background-color: #07689f;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  font-family: "Architects Daughter", cursive;
+}
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #a2d5f2;
+}
+h2,
+h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+h3 {
+  color: #a2d5f2;
+}
+form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+input {
+  text-align: center;
+}
+#day,
+#weather,
+#forecast {
+  text-align: center;
+  color: #fafafa;
+}
+#weather {
+  font-size: 35px;
+  margin-bottom: 5px;
+}
+#forecast {
+  font-size: 20px;
+}
+button {
+  background-color: #ff7e67;
+  color: #fafafa;
+  border: #fafafa;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+.current-city,
+#date-time {
+  color: #a2d5f2;
+}
+.current-temperature {
+  color: #fafafa;
+}
+.current-weather {
+  font-size: 30px;
+  color: #fafafa;
+  padding-top: 10px;
+}
+#convert {
+  font-size: 20px;
+}
+#celsius,
+#farenheit {
+  text-decoration: underline;
+  color: #ff7e67;
+  cursor: pointer;
+}
