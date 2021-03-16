@@ -16,9 +16,6 @@ function searchCity(event) {
   axios.get(`${apiUrl}&appid=${apiKey}`).then(updateTemp);
 }
 
-let form = document.querySelector("#enter-city-form");
-form.addEventListener("submit", searchCity);
-
 // searchCity will update the name of the city and the temperature (in metric) after the user searches; code works currently 22/02/2021
 
 function searchCityNow(event) {
@@ -54,27 +51,6 @@ button.addEventListener("click", searchCityNow);
 
 // don't use onclick here. or onlick, for that matter. thanks, Andrés xD
 
-let now = new Date();
-
-let days = [
-  `Sunday`,
-  `Monday`,
-  `Tuesday`,
-  `Wednesday`,
-  `Thursday`,
-  `Friday`,
-  `Saturday`
-];
-let day = days[now.getDay()];
-
-let today = document.querySelector("#weekday");
-today.innerHTML = `${day}`;
-
-let timeNow = document.querySelector("#time");
-let hour = now.getHours();
-let minutes = now.getMinutes();
-timeNow.innerHTML = `${hour}:${minutes}`;
-
 function displayFarenheit() {
   let tempFarenheit = document.querySelector("#search-temperature");
   tempFarenheit.innerHTML = `42.8º`;
@@ -91,3 +67,5 @@ convertCelsius.addEventListener("click", displayCelsius);
 
 // installed axios in <head> 22/02/2021
 
+let form = document.querySelector("#enter-city-form");
+form.addEventListener("submit", searchCity);
