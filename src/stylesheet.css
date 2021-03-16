@@ -35,7 +35,7 @@ button {
 .current-city,
 #date-time,
 .wind,
-.precipitation {
+.humidity {
   color: #a2d5f2;
 }
 .current-temperature {
@@ -54,7 +54,7 @@ button {
 }
 #or,
 #wind-speed,
-#precipitation-percent {
+#humidity-percent {
   color: #fafafa;
 }
 .active {
@@ -73,4 +73,9 @@ button {
 .wind {
   padding-top: 30px;
   font-size: 30px;
+}
+.weather-forecast-temperature {
+  color: #fafafa;
+  font-size: 30px;
+  text-align: center;
 }

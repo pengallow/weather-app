@@ -40,14 +40,49 @@ function searchCity(event) {
     let weatherIconElement = document.querySelector("#weather-icon");
     let weatherCondition = document.querySelector("#weather-description");
     let windElement = document.querySelector("#wind-speed");
-    //let precipitationElement = document.querySelector("#precipitation-amount");
+    let humidityElement = document.querySelector("#humidity-percent");
 
     weatherIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     weatherCondition.innerHTML = response.data.weather[0].description;
     windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
-    //precipitationElement.innerHTML = `${Math.round(response.data.daily[0].pop)}`;
+    humidityElement.innerHTML = `${response.data.main.humidity}%`;
   }
+
+  function formatHours(timestamp) {
+    let date = new Date(timestamp);
+    let hours = date.getHours();
+    if (hours < 10) {
+        hours = `0${hours}`;
+    }
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
+
+    return `${hours}:${minutes}`;
+  }
+
+  function displayForecast(response) {
+      let forecastElement = document.querySelector("#forecast");
+      forecastElement.innerHTML = null;
+      let forecast = null;
+
+      for (let index = 0; index < 6; index++) {
+        forecast = response.data.list[index];
+        forecastElement.innerHTML += `<div class="col-2">
+                            <h3>${formatHours(forecast.dt * 1000)}</h3>
+                            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" />
+                            <div class="weather-forecast-temperature">
+                                <strong>${Math.round(forecast.main.temp_max)}º</strong> ${Math.round(forecast.main.temp_min)}º
+                            </div>
+                        </div>`
+      }
+    }
+
   axios.get(`${apiUrl}&appid=${apiKey}`).then(updateTemp);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 // searchCity will update the name of the city and the temperature (in metric) after the user searches; code works currently 22/02/2021
@@ -63,7 +98,41 @@ function searchCityNow(event) {
     function showCityNow(response) {
       let currentLocationCity = response.data.address.county.replace(`City of`, ``);
       let userCurrentCity = document.querySelector("#target-city");
+      let apiKeyWeather = "3b69d9e884899e81040ee4e357f33f8b";
       userCurrentCity.innerHTML = `${currentLocationCity}`;
+
+      function formatHours(timestamp) {
+      let date = new Date(timestamp);
+      let hours = date.getHours();
+      if (hours < 10) {
+        hours = `0${hours}`;
+      }
+      let minutes = date.getMinutes();
+      if (minutes < 10) {
+        minutes = `0${minutes}`;
+      }
+
+      return `${hours}:${minutes}`;
+      }
+
+      function displayForecast(response) {
+        let forecastElement = document.querySelector("#forecast");
+        forecastElement.innerHTML = null;
+        let forecast = null;
+
+        for (let index = 0; index < 6; index++) {
+          forecast = response.data.list[index];
+          forecastElement.innerHTML += `<div class="col-2">
+                            <h3>${formatHours(forecast.dt * 1000)}</h3>
+                            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" />
+                            <div class="weather-forecast-temperature">
+                                <strong>${Math.round(forecast.main.temp_max)}º</strong> ${Math.round(forecast.main.temp_min)}º
+                            </div>
+                        </div>`
+        }
+      }
+      apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentLocationCity}&units=metric&appid=${apiKeyWeather}`;
+      axios.get(apiUrl).then(displayForecast);
     }
     axios.get(`${apiUrlLocation}`).then(showCityNow);
 
@@ -101,14 +170,14 @@ function searchCityNow(event) {
     let weatherIconElement = document.querySelector("#weather-icon");
     let weatherCondition = document.querySelector("#weather-description");
     let windElement = document.querySelector("#wind-speed");
-    //let precipitationElement = document.querySelector("#precipitation-amount");
+    let humidityElement = document.querySelector("#humidity-percent");
 
     weatherIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     weatherCondition.innerHTML = response.data.weather[0].description;
     windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
-    //precipitationElement.innerHTML = `${Math.round(response.data.daily[0].pop)}`;
+    humidityElement.innerHTML = `${response.data.main.humidity}%`;
     }
-    axios.get(`${apiLinkWeather}&appid=${apiKeyWeather}`).then(showTemperature);
+    axios.get(`${apiLinkWeather}&appid=${apiKeyWeather}`).then(showTemperature); 
   }
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
@@ -118,7 +187,5 @@ form.addEventListener("submit", searchCity);
 
 let button = document.querySelector("#gps-location");
 button.addEventListener("click", searchCityNow);
-
-// don't use onclick here. or onlick, for that matter. thanks, Andrés xD
 
 // installed axios in <head> 22/02/2021
