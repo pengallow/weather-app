@@ -28,24 +28,31 @@
         <hr />
         <h2>
             <div class="row">
-                <div class="col-6 current-city" id="target-city">Please enter a city</div>
-                <div class="col-6 current-weather"></div>
-                
+                <div class="col-4"></div>
+                <div class="col-4 current-city" id="target-city">Please enter a city</div>   
             </div>
             <div class="row">
-                <div class="col-6 current-temperature" id="search-temperature">
-                    ---
+                <div class="col-4">
+                    <img src="" id="weather-icon" />
                 </div>
-                
+                <div class="col-4 current-temperature">
+                    <span id="search-temperature">---</span>
+                </div>
+                <div class="col-4 wind">
+                    Wind: <span id="wind-speed"></span>
+                </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-4" id="date-time">
+                    <span id="weather-description"></span>
+                </div>
+                <div class="col-4">
                     <p id="convert">
-                        <span id="celsius">ºC</span> | <span id="farenheit">ºF</span>
+                        <span id="celsius"><a href="#" id="celsius-link" class="active">ºC</a></span> | <span id="farenheit"><a href="#" id="fahrenheit-link">ºF</a></span>
                     </p>
                 </div>
-                <div class="col-6" id="date-time">
-                    <span id="weekday">Last Updated </span>
+                <div class="col-4 precipitation">
+                    Precipitation: <span id="precipitation-amount"></span>
                 </div>
             </div>
         </h2>

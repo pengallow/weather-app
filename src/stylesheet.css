@@ -25,16 +25,6 @@ form {
 input {
   text-align: center;
 }
-#day,
-#weather,
-#forecast {
-  text-align: center;
-  color: #fafafa;
-}
-#weather {
-  font-size: 35px;
-  margin-bottom: 5px;
-}
 button {
   background-color: #ff7e67;
   color: #fafafa;
@@ -43,29 +33,44 @@ button {
   border-radius: 20px;
 }
 .current-city,
-#date-time {
+#date-time,
+.wind,
+.precipitation {
   color: #a2d5f2;
 }
 .current-temperature {
   color: #fafafa;
-}
-.current-weather {
-  font-size: 30px;
-  color: #fafafa;
-  padding-top: 10px;
+  font-size: 75px;
 }
 #convert {
-  font-size: 20px;
+  font-size: 30px;
 }
-#celsius,
-#farenheit {
-  text-decoration: underline;
+#celsius-link,
+#fahrenheit-link {
   color: #ff7e67;
-  cursor: pointer;
 }
 #github-link {
   text-align: center;
 }
-#or {
+#or,
+#wind-speed,
+#precipitation-percent {
   color: #fafafa;
+}
+.active {
+  color: #ff7e67;
+  cursor: default;
+  text-decoration: none;
+}
+.active:hover {
+  color: #ff7e67;
+  text-decoration: none;
+  cursor: default;
+}
+#weather-description {
+  text-transform: capitalize;
+}
+.wind {
+  padding-top: 30px;
+  font-size: 30px;
 }

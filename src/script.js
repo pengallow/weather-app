@@ -9,9 +9,43 @@ function searchCity(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
 
   function updateTemp(response) {
+    console.log(response.data);
     let temperature = Math.round(response.data.main.temp);
     let newTemp = document.querySelector("#search-temperature");
     newTemp.innerHTML = `${temperature}º`;
+
+    function showFahrenheitTemperature(event) {
+      event.preventDefault();
+      let fahrenheitTemperature = (temperature * 9) / 5 + 32;
+      celsiusLink.classList.remove("active");
+      fahrenheitLink.classList.add("active");
+      let temperatureElement = document.querySelector("#search-temperature");
+      temperatureElement.innerHTML = `${Math.round(fahrenheitTemperature)}º`;
+    }
+
+    function showCelsiusTemperature(event) {
+    event.preventDefault();
+    celsiusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    let temperatureElement = document.querySelector("#search-temperature");
+    temperatureElement.innerHTML = `${Math.round(temperature)}º`;
+    }
+
+    let fahrenheitLink = document.querySelector("#fahrenheit-link");
+    fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
+
+    let celsiusLink = document.querySelector("#celsius-link");
+    celsiusLink.addEventListener("click", showCelsiusTemperature);
+
+    let weatherIconElement = document.querySelector("#weather-icon");
+    let weatherCondition = document.querySelector("#weather-description");
+    let windElement = document.querySelector("#wind-speed");
+    //let precipitationElement = document.querySelector("#precipitation-amount");
+
+    weatherIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    weatherCondition.innerHTML = response.data.weather[0].description;
+    windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
+    //precipitationElement.innerHTML = `${Math.round(response.data.daily[0].pop)}`;
   }
   axios.get(`${apiUrl}&appid=${apiKey}`).then(updateTemp);
 }
@@ -40,32 +74,51 @@ function searchCityNow(event) {
       let currentTemp = Math.round(response.data.main.temp);
       let newTemp = document.querySelector("#search-temperature");
       newTemp.innerHTML = `${currentTemp}º`;
+
+      function showFahrenheitTemperature(event) {
+      event.preventDefault();
+      let fahrenheitTemperature = (currentTemp * 9) / 5 + 32;
+      celsiusLink.classList.remove("active");
+      fahrenheitLink.classList.add("active");
+      let temperatureElement = document.querySelector("#search-temperature");
+      temperatureElement.innerHTML = `${Math.round(fahrenheitTemperature)}º`;
+    }
+
+    function showCelsiusTemperature(event) {
+    event.preventDefault();
+    celsiusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    let temperatureElement = document.querySelector("#search-temperature");
+    temperatureElement.innerHTML = `${Math.round(currentTemp)}º`;
+    }
+
+    let fahrenheitLink = document.querySelector("#fahrenheit-link");
+    fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
+
+    let celsiusLink = document.querySelector("#celsius-link");
+    celsiusLink.addEventListener("click", showCelsiusTemperature);
+
+    let weatherIconElement = document.querySelector("#weather-icon");
+    let weatherCondition = document.querySelector("#weather-description");
+    let windElement = document.querySelector("#wind-speed");
+    //let precipitationElement = document.querySelector("#precipitation-amount");
+
+    weatherIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    weatherCondition.innerHTML = response.data.weather[0].description;
+    windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
+    //precipitationElement.innerHTML = `${Math.round(response.data.daily[0].pop)}`;
     }
     axios.get(`${apiLinkWeather}&appid=${apiKeyWeather}`).then(showTemperature);
   }
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
+let form = document.querySelector("#enter-city-form");
+form.addEventListener("submit", searchCity);
+
 let button = document.querySelector("#gps-location");
 button.addEventListener("click", searchCityNow);
 
 // don't use onclick here. or onlick, for that matter. thanks, Andrés xD
 
-function displayFarenheit() {
-  let tempFarenheit = document.querySelector("#search-temperature");
-  tempFarenheit.innerHTML = `42.8º`;
-}
-let convertFarenheit = document.querySelector("#farenheit");
-convertFarenheit.addEventListener("click", displayFarenheit);
-
-function displayCelsius() {
-  let tempCelsius = document.querySelector("#search-temperature");
-  tempCelsius.innerHTML = `6º`;
-}
-let convertCelsius = document.querySelector("#celsius");
-convertCelsius.addEventListener("click", displayCelsius);
-
 // installed axios in <head> 22/02/2021
-
-let form = document.querySelector("#enter-city-form");
-form.addEventListener("submit", searchCity);
