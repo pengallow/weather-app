@@ -42,7 +42,7 @@ function searchCity(event) {
     let windElement = document.querySelector("#wind-speed");
     let humidityElement = document.querySelector("#humidity-percent");
 
-    weatherIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    weatherIconElement.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     weatherCondition.innerHTML = response.data.weather[0].description;
     windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
     humidityElement.innerHTML = `${response.data.main.humidity}%`;
@@ -71,7 +71,7 @@ function searchCity(event) {
         forecast = response.data.list[index];
         forecastElement.innerHTML += `<div class="col-2 text-center">
                             <h3>${formatHours(forecast.dt * 1000)}</h3>
-                            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" />
+                            <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" />
                             <div class="weather-forecast-temperature">
                                 <strong>${Math.round(forecast.main.temp_max)}º</strong> ${Math.round(forecast.main.temp_min)}º
                             </div>
@@ -172,7 +172,7 @@ function searchCityNow(event) {
     let windElement = document.querySelector("#wind-speed");
     let humidityElement = document.querySelector("#humidity-percent");
 
-    weatherIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    weatherIconElement.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     weatherCondition.innerHTML = response.data.weather[0].description;
     windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
     humidityElement.innerHTML = `${response.data.main.humidity}%`;
